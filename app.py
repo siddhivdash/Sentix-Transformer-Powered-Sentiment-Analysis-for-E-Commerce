@@ -372,7 +372,13 @@ with tab2:
     uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
     if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file)
+        try:
+            # Try standard UTF-8 first
+            df = pd.read_csv(uploaded_file)
+        except UnicodeDecodeError:
+        # If UTF-8 fails, try latin-1, which handles a wider range of characters
+            uploaded_file.seek(0) # Reset file pointer to the beginning
+            df = pd.read_csv(uploaded_file, encoding='latin-1')
         st.markdown('<div class="section-label">🗂 &nbsp; Select Column to Analyze</div>', unsafe_allow_html=True)
         text_column = st.selectbox("Text Column", df.columns, label_visibility="visible")
 

@@ -1,0 +1,21 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+env/
+.env
+sentiment/
+
+# Data & Models (Crucial to exclude these for deployment)
+data/*.csv
+data/*.bz2
+data/*.txt
+models/
+
+# OS-specific
+.DS_Store
+Thumbs.db
